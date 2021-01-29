@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>d'Fun Station</title>
+  <meta content="IE=edge" http-equiv="x-ua-compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+
+  <!-- Fonts -->
+  <!-- Styles -->
+  <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+  <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+  <link href="css/swiper.css" rel="stylesheet" type="text/css">
+  <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/fastclick.js"></script>
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/iscroll.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="controller/setting.js"></script>
+</head>
+
+<body>
+  <div class="m-scene" id="main">
+
+
+    <!-- Page Content -->
+    <div id="content" class="grey-blue page" style="margin-top:0px !important;padding-top:56px">
+
+      <!-- Toolbar -->
+      <div id="toolbar" class="primary-color">
+        <div class="open-left waves-effect waves-circle">
+          <a href="javascript:history.back();"><i class="fal fa-arrow-left"></i></a>
+        </div>
+        <span class="title">Akun</span>
+      </div>
+
+
+      <div class="topmenu" style="margin-top:0px; margin-bottom:0px;">
+        <div class="topmenu-nama"><span class="fal fa-user"></span>
+          <script>document.write(localStorage.userfullname);</script>
+        </div>
+        <div class="topmenu-poin">0 Poin</div>
+      </div>
+
+      <!-- Profile Content -->
+      <div class="animated fadein delay-1 setting" style="margin-top:20px">
+
+        <div class="card waves-effect waves-ripplem-t-0 animated fadein delay-1 sound-click"
+          onClick="javascript:fade('notifikasi.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-bell"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong><span class="jmlnotif">0</span> Notifikasi</strong></p>
+              <p class="small m-0">Ada <span class="jmlnotif">0</span> notifikasi yang belum dibaca.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('customerservice.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-user-cog"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Customer Service</strong></p>
+              <p class="small m-0">Chat dengan Customer Service.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('claim.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-gift"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Claim Voucher</strong></p>
+              <p class="small m-0">Klaim voucher anda dan dapatkan manfaatnya.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('voucher.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-ticket"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Voucher Konsultasi</strong></p>
+              <p class="small m-0">Daftar voucher untuk konsultasi.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('barcode.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-qrcode"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Dapatkan Poin</strong></p>
+              <p class="small m-0">Dapatkan poin tambahan dengan scan QR Code di lokasi d'Fun Station.</p>
+            </div>
+          </div>
+        </div>
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('poin.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-star"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong><span class="jmlpoint">0</span> Poin</strong></p>
+              <p class="small m-0">Dapatkan lebih banyak poin dengan aktif .</p>
+            </div>
+          </div>
+        </div>
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('setting-redeem.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-ticket"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Voucher Redeem Poin</strong></p>
+              <p class="small m-0">lihat voucher redeem yang dapat digunakan.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('editprofile.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-cog"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Setting Profile</strong></p>
+              <p class="small m-0">Atur Profile anda disini.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('avatar.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-user"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Ganti Photo Profil</strong></p>
+              <p class="small m-0">Ganti photo profile anda di sini.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1  sound-click"
+          onClick="javascript:fade('gantipassword.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-key"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Ganti Password</strong></p>
+              <p class="small m-0">Amankan akun anda dan ganti password.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('tidakmampu.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-flag"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Pengguna Bebas Biaya</strong></p>
+              <p class="small m-0">Ajukan bebas biaya untuk konsultasi berbayar.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click"
+          onClick="javascript:fade('membersekolah.html');">
+          <div class="c-widget">
+            <div class="c-widget-figure">
+              <i class="fal fa-building"></i>
+            </div>
+            <div class="c-widget-body">
+              <p class="m-0"><strong>Member Sekolah</strong></p>
+              <p class="small m-0">Daftar untuk menjadi member sekolah.</p>
+            </div>
+          </div>
+        </div>
+
+        <a href="javascript:logout()">
+          <div class="card waves-effect waves-rippleanimated fadein delay-1 sound-click">
+            <div class="c-widget">
+              <div class="c-widget-figure ">
+                <i class="fal fa-unlock"></i>
+              </div>
+              <div class="c-widget-body">
+                <p class="m-0"><strong>Logout</strong></p>
+                <p class="small m-0">Keluar dari aplikasi sekarang</p>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div><br><br>
+      <div class="steps-controllers">
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span class="menubuttom"><span
+                class="fal fa-home-alt"></span></span><br>Home</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span
+              class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span
+                class="fal fa-star"></span></span><br>Promo</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span
+                class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')" class="active"><span
+              class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+      </div>
+    </div> <!-- End of Page Container -->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.swipebox.min.js"></script>
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/functions.js"></script>
+
+</body>
+
+</html>

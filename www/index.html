@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>d'Fun Station</title>
+  <meta content="IE=edge" http-equiv="x-ua-compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+  <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+  <link href="css/swiper.css" rel="stylesheet" type="text/css">
+  <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/swiper.min.js"></script>
+  <script type="text/javascript" src="js/fastclick.js"></script>
+  <script type="text/javascript" src="js/iscroll.js"></script>
+  <script type="text/javascript" src="js/overlay.js"></script>
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="controller/index.js"></script>
+</head>
+
+<body>
+  <div class="m-scene bg-ff" id="main">
+    <!-- Main Container -->
+    <!-- Page Content -->
+    <div id="content" style="background:#f3f3f3">
+      <!-- Toolbar -->
+      <div id="toolbar" class="toolbarhome primary-color">
+        <div class="toolbar-search">
+          <input type="text" id="kuncis" placeholder="Apa yang anda cari?">
+        </div>
+        <div class="open-right waves-effect waves-circle">
+          <a href="notifikasi.html" class="waves-effect waves-circle">
+            <i class="fal fa-bell"></i>
+            <div id="jumlah-notifikasi" style="margin-top: -44px; margin-right: 17px; "></div>
+          </a>
+          <!-- <i class="fal fa-bell"></i> <img src="img/notif.png" alt=""> -->
+          <!-- <a href="javascript:fade('customerservice.html')" class="waves-effect waves-circle"><i class="fal fa-user-cog"></i></a> -->
+        </div>
+      </div>
+
+      <div class="homebox">
+        <div class="menu-profile animated fadein"></div>
+        <div class="menu-notif"></div>
+      </div>
+
+      <div class="menuhomebox animated fadein">
+        <div class="menuhome-1">
+          <div class="h-banner animated fadein swiper-container s1" id="slider1">
+
+            <div class="swiper-wrapper" id="banner-home-item"></div>
+            <div class="swiper-pagination white-bullet">
+            </div>
+
+          </div>
+        </div>
+
+        <div class="menuhome">
+          <div class="animated fadein menu-home waves-effect waves-ripple">
+            <a href="javascript:fade('konsul_menu.html');">
+              <span class="menuhome-item"><img src="img/img.menu.funconsultant.png"></span></span>
+            </a>
+            <a href="javascript:fade('konsul.html');">Fun <br>Consultation</a>
+          </div>
+          <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('peer_konsul.html');">
+              <span class="menuhome-item"><img src="img/img.menu.peer.png"></span></span>
+            </a>
+            <a href="javascript:fade('peer_konsul.html');">Teman <br>Curhat</a>
+          </div>
+          <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('school.html');">
+              <span class="menuhome-item"><img src="img/img.menu.sc.png"></span></span>
+            </a>
+            <a href="javascript:fade('school.html');">School <br>Counseling</a>
+          </div>
+          <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('education.html');">
+              <span class="menuhome-item"><img src="img/img.menu.edukasi.png"></span></span>
+            </a>
+            <a href="javascript:fade('education.html');">Fun<br> Education</a>
+          </div>
+          <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('funcommunity.html');">
+              <span class="menuhome-item"><img src="img/img.menu.funcommunity.png"></span></span>
+            </a>
+            <a href="javascript:fade('funcommunity.html');">Fun <br>Community</a>
+          </div>
+          <!-- <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('event.html');">
+              <span class="menuhome-item"><img src="img/img.menu.funevent.png"></span></span>
+            </a>
+            <a href="javascript:fade('event.html');">Fun<br> Event</a>
+          </div> -->
+          <div class="animated fadein menu-home waves-effect  waves-ripple">
+            <a href="javascript:fade('health.html');">
+              <span class="menuhome-item"><img src="img/img.menu.funhealth.png"></span></span>
+            </a>
+            <a href="javascript:fade('education.html');">Fun<br> Health</a>
+          </div>
+          <!-- <div class="animated fadein menu-home waves-effect  waves-ripple">
+                    <a href="javascript:fade('corner.html');">
+                        <span class="menuhome-item"><img src="img/img.menu.funcorner.png"></span></span>
+                    </a>
+                    <a href="javascript:fade('corner.html');">Fun <br>Corner</a>
+                </div>
+                
+                 <div class="animated fadein menu-home waves-effect  waves-ripple">
+                    <a href="javascript:fade('funworld.html');">
+                         <span class="menuhome-item"><img src="img/img.menu.funworld.png"></span></span>
+                    </a>
+                    <a href="javascript:fade('funworld.html');">Fun <br>World</a>
+                </div> 
+                <div class="animated fadein menu-home waves-effect  waves-ripple">
+                    <a href="javascript:fade('menu.html');">
+                        <span class="menuhome-item"><img src="img/img.menu.funother.png"></span></span>
+                    </a>
+                    <a href="javascript:fade('menu.html');">Lainnya</a>
+                </div> -->
+
+        </div>
+      </div>
+
+      <br clear="all">
+      <br clear="all">
+      <div class="training-preview-home">
+        <table>
+          <tr>
+            <td style="padding: 0px;">Promo untuk Anda</td>
+            <td style="padding: 0px;text-align: right;font-size: 14px;color:#669820"><a
+                href="javascript:fade('promo.html')">Lihat Semua <i class="fal fa-chevron-right"></i></a></td>
+          </tr>
+        </table>
+      </div>
+      <br clear="all">
+      <div class="animated fadein">
+        <!-- Slider -->
+        <div class="sliding s0">
+          <div class="sliding-wrapper">
+            <div class="loading">
+              <center><img src="img/loading.svg" /></center>
+            </div>
+          </div>
+        </div> <!-- End of Main Contents -->
+
+      </div>
+
+      <br clear="all">
+      <br clear="all">
+      <div class="training-preview-home">
+        <table>
+          <tr>
+            <td style="padding: 0px;">Artikel untuk Anda</td>
+            <td style="padding: 0px;text-align: right;font-size: 14px;color:#669820"><a
+                href="javascript:fade('blog.html')">Lihat Semua <i class="fal fa-chevron-right"></i></a></td>
+          </tr>
+        </table>
+      </div>
+      <br clear="all">
+      <div class="animated fadein">
+        <!-- Slider -->
+        <div class="sliding s0">
+          <div class="sliding-wrapper1">
+            <div class="loading">
+              <center><img src="img/loading.svg" /></center>
+            </div>
+          </div>
+        </div> <!-- End of Main Contents -->
+      </div>
+
+      <br clear="all"><br clear="all"><br clear="all">
+      <div class="steps-controllers">
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('index.html')" class="active"><span
+              class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span
+              class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span
+                class="fal fa-star"></span></span><br>Promo</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span
+                class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+        <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span
+                class="fal fa-user"></span></span><br>Akun</a></div>
+      </div>
+    </div>
+  </div>
+  <!-- Plugin JS -->
+  <script type="text/javascript" src="cordova.js"></script>
+  <script src="js/jquery.swipebox.min.js"></script>
+  <script src="js/jquery.smoothState.min.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/jquery.mixitup.min.js"></script>
+  <script src="js/masonry.min.js"></script>
+  <script src="js/chart.min.js"></script>
+  <script src="js/functions.js"></script>
+</body>
+
+</html>

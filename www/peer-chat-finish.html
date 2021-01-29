@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+
+    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+ 
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+   </script>
+   <script src="js/sweetalert.min.js"></script>
+   
+   <script type="text/javascript" src="js/iscroll.js"></script>
+   <script type="text/javascript" src="js/main.js"></script>
+
+</head>
+
+  <body>
+    <div class="m-scene" id="main">  
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue page">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+         <a href="javascript:history.back();" class="open-left waves-effect waves-circle">
+            <i class="fal fa-arrow-left"></i>
+          </a>
+           <span class="title">Chat</span>
+        </div>
+        
+         <!-- Main Content -->
+            
+             <!-- Main Content -->
+        <div class="animated fadeinup">
+
+          <div class="container">
+            <div class="row">
+              <div class="col s12">
+              
+              
+               <p id="name-area"></p>
+    
+    			<div id="chat-wrap">
+                <div class="chat">
+                	<ul id="chat-area" style="height:auto">
+                    	<div class="loading"><center><img src="img/loading.svg" /><br><b>Mohon menunggu</b><br>sedang menyiapkan halaman</center></div>
+                    </ul>
+                </div>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+            
+        </div> 
+        
+       
+        <script>
+		var chatid = getvar("chatid");
+		$.ajax({
+			type: "POST",
+			crossDomain: true,
+			cache: false,
+			url: "https://www.dfunstation.com/api4/android/index.php/peer/chat-read/"+chatid+"/"+localStorage.userid+"/"+localStorage.lastchatid+"/?callback=?",
+			success: function(data) {
+				if(data.text)
+				{
+					$(".loading").remove(); 
+					
+					for (var i = 0; i < data.text.length; i++) {
+						var datax = data.text[i];
+						var ids = datax.id;
+						var pesan = datax.pesan;
+						$('#chat-area').append($(""+ pesan +""));
+						localStorage.lastchatid = ids;
+					}	
+				}
+				
+			}
+		});
+		</script>
+        <br>
+        
+        <div class="p-20 notification notification-warning">
+        <center>
+        Chat ini sudah selesai atau habis waktu. Apakah anda akan
+        menghapus chat ini beserta seluruh pesannya?
+        <br clear="all"> <br clear="all">
+        <button id="hapuschat" class="btn btn-block danger waves-effect waves-effect" onClick="delchat();"><i class="fal fa-minus-circle"></i> Hapus</button>
+        <button id="hapuschat" class="btn btn-block danger waves-effect waves-effect" onClick="rate();"><i class="fal fa-star"></i> Berikan Rating </button>
+        </center>
+        </div>
+        
+        
+        <br>
+        <br clear="all"><br clear="all">
+        
+        <script>
+		function delchat()
+		{
+			var urls ="https://www.dfunstation.com/api4/android/index.php/peer/delete/"+localStorage.userid+"/"+chatid+"/?callback=?";
+			$.ajax({
+			  type: "GET",
+			  url: urls,
+			  crossDomain: true,
+			  cache: false,
+			  success: function(data){
+			  	
+				  if(data['status']=="OK")
+				  {
+					slide("chat-peer.html");
+				  }
+				 }
+			  });
+		}
+		function rate()
+		{
+			slide("peer-chat-rate.html?chatid="+chatid);
+		}
+		</script>
+        
+		</div>
+       </div><br><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')" class="active"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+       </div>
+ </div> <!-- End of Page Container -->
+ 
+   
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/functions.js"></script>
+ 
+  </body>
+</html>

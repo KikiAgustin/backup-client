@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	  <script src="js/fastclick.js"></script>
+	  <script type="text/javascript" src="https://app.midtrans.com/snap/snap.js" data-client-key="Mid-client-FfMLixYm6nWQjUdI"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+	if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	
+	 </script>
+   <script>
+	$(document).ready(function(){
+	   var chatid = getvar("chatid");
+	   var us = getvar("userid");
+	   var urls ="https://www.dfunstation.com/api4/android/index.php/konsultasi/chat-start/"+chatid+"/"+localStorage.userid+"/?callback=?";
+	   $.ajax({
+		   type: "GET",
+		   url: urls,
+		   crossDomain: true,
+		   cache: false,
+		   success: function(data){
+			   if(data['status']=="OK"){
+				   //alert(data['midtrans']);
+				   if(data['paid'] < 1 ) {
+					   if(data['midtrans'] == "pending") {
+							$("#byr").html('Pembayaran untuk sesi konsultasi ini belum selesai, silakan selesaikan atau konfirmasi pembayaran Anda.');
+							$("#end").html('Konfirmasi Pembayaran.');
+							$("#end").attr("href","javascript:fade(\'voucher-buy.html?action=read&chatid="+chatid+"&userid="+us+"\')");
+							$("#end").show();
+							$("#bayarx").show();
+							$("#bayar").hide();
+					   } else if(data['midtrans'] == "expire") {
+							$("#byr").html('Pembayaran untuk sesi konsultasi ini sudah Expire, silakan lakukan konsultasi baru.');
+							$("#end").html('Konsultasi Baru.');
+							$("#end").attr("href","javascript:fade(\'konsul.html\')");
+							$("#end").show();
+							$("#bayarx").show();
+							$("#bayar").hide();
+					   } else if(data['midtrans'] == "capture" || data['midtrans']=="settlement") {
+							$("#byr").html('Pembayaran untuk sesi konsultasi ini telah berhasil, silakan lanjutkan konsultasi.');
+							$("#end").html('Lanjutkan Konsultasi.');
+							$("#end").attr("href","javascript:fade(\'chat-start.html?action=read&chatid="+chatid+"&userid="+us+"\')");
+							$("#end").show();
+							$("#bayarx").show();
+							$("#bayar").hide();
+					   } else {
+							/* $("#byr").html('Pembayaran untuk sesi konsultasi ini belum selesai, silakan selesaikan atau konfirmasi pembayaran Anda.');
+							$("#bayarx").show();
+							$("#bayar").hide(); */
+					   }
+				   } else {
+					   //alert('ok');
+						$("#byr").html('Pembayaran untuk sesi konsultasi ini telah berhasil, silakan lanjutkan konsultasi.');
+						$("#end").html('Lanjutkan Konsultasi.');
+						$("#end").attr("href","javascript:fade(\'chat-start.html?action=read&chatid="+chatid+"&userid="+us+"\')");
+						$("#end").show();
+						$("#bayarx").show();
+						$("#bayar").hide();
+				   }
+			   }
+		   }
+	   });
+	 });
+  
+	</script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+
+  <script type="text/javascript" src="js/iscroll.js"></script>
+	
+</head>
+
+  <body>
+    <div class="m-scene" id="main">
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue page" style="background:#f3f3f3;margin-top:0px !important;padding-top:56px">
+
+        <!-- Toolbar -->
+       <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+          
+          <span class="title">Pembelian Voucher</span><div class="open-left waves-effect waves-circle">
+            <a href="javascript:history.back();"><i class="fal fa-arrow-left"></i></a>
+          </div>
+		</div>
+		
+			<div class="p-20" id="bayarx" style="display:none">
+				<p id="byr"></p>
+				<a href="#" id="end" class="btn primary-color btn-block waves waves-ripple" style="display:none"></a>
+			</div>
+		
+		<div class="p-20" id="bayar">
+			Silahkan anda pilih metode pembayaran yang akan anda gunakan, anda bisa menggunakan Virtual Number (Bank transfer)
+			juga dengan menggunakan Akun Gopay Anda.<br><br>
+			<a href="#" onclick="midtranx();" class="waves-effect waves-ripple"><img src="img/img.bayar.transfer.png"></a>
+			<br><br> <a href="#" onclick="midtranx();" class="waves-effect waves-ripple"><img src="img/img.bayar.gopay.png"></a>
+			</div>
+        
+        
+		<script> 
+			function midtranx() {
+				//alert('ok');
+				//event.preventDefault();
+				//$(this).attr("disabled", "disabled");
+				var chatid = getvar("chatid");
+	   			var us = getvar("userid");
+				$.ajax({
+					type: "GET",
+					url: "https://www.dfunstation.com/api4/android/index.php/konsultasi/chat-midtrans/" + chatid + "/" + us +  "/?callback=?",
+					//data:"kode_kursi="+localStorage.kode_kursi+"&codeticket="+localStorage.codeticket+"&token=Qaz2wsXedc4rfV",
+					crossDomain: true,
+					cache: false,
+					success		: function(data){
+						if(data == 'gagal'){
+							swal("Sesuatu telah gagal diproses...");
+						} else {
+										//location = data;
+										//console.log('token = ' + data);
+										var resultType = document.getElementById('result-type');
+										var resultData = document.getElementById('result-data');
+										function changeResult(type, data) {
+											localStorage.type = type;
+											localStorage.data = JSON.stringify(data);
+											//$("#result-type").val(type);
+											//$("#result-data").val(JSON.stringify(data));
+											//resultType.innerHTML = type;
+											//resultData.innerHTML = JSON.stringify(data);
+										}
+										snap.pay(data, {
+
+											onSuccess: function (result) {
+												changeResult('success', result);
+												console.log(result.status_message);
+												console.log(result.pdf_url);
+												console.log(result);
+												localStorage.message = result.status_message;
+												localStorage.pdf = result.pdf_url;
+												fade('voucher-buy.html?action=read&chatid='+chatid+'&userid='+us);
+												//$("#rsv").submit();
+											},
+											onPending: function (result) {
+												changeResult('pending', result);
+												console.log(result.status_message);
+												console.log(result.pdf_url);
+												//console.log(result);
+												localStorage.message = result.status_message;
+												localStorage.pdf = result.pdf_url;
+												fade('voucher-buy.html?action=read&chatid='+chatid+'&userid='+us);
+											},
+											onError: function (result) {
+												changeResult('error', result);
+												console.log(result.status_message);
+												localStorage.message = result.status_message;
+												localStorage.pdf = result.pdf_url;
+												//console.log(result.pdf_url);
+												//console.log(result);
+												fade('voucher-buy.html?action=read&chatid='+chatid+'&userid='+us);
+											}
+										});
+						}
+		            }
+				}); 
+			}
+		</script>
+        
+     	<br clear="all"><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+ </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/functions.js"></script>
+  </body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>DFun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,700' rel='stylesheet' type='text/css'>
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	<script type="text/javascript">
+    var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+ 
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	</script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+
+  </head>
+
+  <body>
+    <div class="m-scene" id="main"> <!-- Main Container -->
+
+      <!-- Sidebars -->
+      <!-- Right Sidebar -->
+      <ul id="slide-out" class="side-nav">
+       
+        <li id="sidebar1" class="p-20">
+         
+          <!-- Facebook -->
+          <div class="facebook">
+            <h6 class="follow-us">Notifications</h6>
+            <div class="face-notification">
+              <img src="img/user2.jpg" alt="" class="cricle">
+              <div>
+                <p>Mike Green</p>
+                <span>Sent you a message</span>
+                <span class="small">Today at 16:48</span>
+              </div>
+            </div>
+            <div class="face-notification">
+              <img src="img/user.jpg" alt="" class="cricle">
+              <div>
+                <p>Lara Connors</p>
+                <span>Post a photo with you</span>
+                <span class="small">Today at 14:26</span>
+              </div>
+            </div>
+            <div class="face-notification">
+              <img src="img/user3.jpg" alt="" class="cricle">
+              <div>
+                <p>Mike Green</p>
+                <span>Post something...</span>
+                <span class="small">Yesterday at 03:19</span>
+              </div>
+            </div>
+          </div>
+
+        </li>
+      
+      </ul>
+      <!-- Left Sidebar -->
+      <ul id="slide-out-left" class="side-nav collapsible ">
+        <li>
+          <div class="sidenav-header primary-color">
+          
+            <div class="nav-avatar">
+              <script>document.write('<img class="circle avatar" src="'+localStorage.avatar+'" alt="">');</script>
+              <div class="avatar-body">
+                <h3><script>document.write(localStorage.userfullname);</script></h3>
+                <p>500 Poin</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <a href="javascript:fade('index.html');"><i class="ion-android-home"></i> Dashboard </a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('barcode.html');"><i class="ion-qr-scanner"></i> Scan Barcode</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-more"></i> Fun Zone </a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-android-globe"></i> Fun World</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-android-cart"></i> Fun Market</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-android-person"></i> Fun Parenting</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-document-text"></i> Fun Info</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:fade('funzone.html');"><i class="ion-gear-a"></i> Pengaturan</a>
+          </div>
+          <div class="collapsible-header">
+            <a href="javascript:logout();"><i class="ion-ios-unlocked"></i> Keluar</a>
+          </div>
+       </li>   
+      </ul>
+      <!-- End of Sidebars -->
+
+      <!-- Page Content -->
+      <div id="content" class="page">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+          <div class="open-left waves-effect waves-circle" id="open-left" data-activates="slide-out-left">
+            <i class="ion-android-menu"></i>
+          </div>
+          <span class="title">Fun Zone</span>
+          <div class="open-right" id="open-right" data-activates="slide-out">
+            <i class="ion-android-notifications"></i>
+          </div>
+        </div>
+        
+                <!-- Main Content -->
+        <div class="animated fadein">
+        	<div class="p-20">
+            <center><br><br><br><br>Fitur ini masih dalam pengembangan silahkan
+            dicoba kembali beberapa waktu kedepan<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br></center>
+            </div>
+		</div>
+
+       
+
+        </div> <!-- End of Main Contents -->
+      
+       
+      </div> <!-- End of Page Content -->
+
+    </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/functions.js"></script>
+  </body>
+</html>

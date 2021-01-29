@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+      <script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+ 
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	</script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+
+  <script type="text/javascript" src="js/iscroll.js"></script>
+	
+</head>
+
+  <body>
+    <div class="m-scene" id="main">
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue page">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+           <a href="javascript:history.back();" class="open-left waves-effect waves-circle">
+            <i class="fal fa-arrow-left"></i>
+          </a>
+           <span class="title">Posting</span>
+        </div>
+               
+		 <div class="animated fadein" style="margin-top:-10px;">
+
+          <div id="load_data"><div class="loading"><center><img src="img/loading.svg" /><br><b>Mohon menunggu</b><br>sedang menyiapkan halaman</center></div></div>
+		  <div id="load_data_message"></div>
+          
+          
+        <script> 
+        $(document).ready(function(){
+ 
+         var id = getvar("id");
+		 var limit = 10;
+         var start = 0;
+         var action = 'inactive';
+		 var datalist = "";
+		
+        
+			   var urls ="https://www.dfunstation.com/api4/android/index.php/member/detailpost/"+localStorage.userid+"/"+id+"/?callback=?";
+			   
+		
+			  	$.ajax({
+				  type: "GET",
+				  url: urls,
+				  crossDomain: true,
+				  cache: false,
+				  success: function(data){
+				  
+				  	  
+				  	
+					  if(data['status']=="OK")
+					  {
+
+							$("#load_data").html("");
+							var dl = data['datapost'];
+							var lastid = "";
+	
+							  for (var key in dl) {
+								if (dl.hasOwnProperty(key)) {
+								  var gambar = dl[key]['mcontent'];
+								  var hapus = dl[key]['hapusposting'];
+								  var unlike = dl[key]['unlike'];
+								  
+								  datalist += '<input type="hidden" id="postid" value="'+dl[key]["postid"]+'" /><div class="blog-card" id="post-'+dl[key]["postid"]+'\'">';
+								  datalist += '<div class="blog-header"><img class="avatar circle" onclick="javascript:fade(\'profile.html?action=read&userid='+dl[key]["userid"]+'\')" src="'+dl[key]["avatar"]+'" alt="" /><div class="blog-author"><span><strong onclick="javascript:fade(\'profile.html?action=read&userid='+dl[key]["userid"]+'\')">'+dl[key]["namalengkap"]+'</strong><i onclick="showdialog(\''+dl[key]["postid"]+'\'); void(\'\');" class="fal fa-ellipsis-v right btn btn-trans"></i></span><span class="small">'+dl[key]["tgltampil"]+'</span></div> </div>';
+								  datalist += '<div class="blog-preview p-10 status-isi" ><p>'+dl[key]["isi"]+'</p></div>';
+								  if(gambar!=null){ datalist += '<div class="blog-image"><img src="' + gambar + '" alt="" /></div>'; }
+								  datalist += '<div class="blog-preview p-10 status-isi"<small>&nbsp;<i class="fal fa-bubble" style="font-size:14px;"></i>&nbsp;' + dl[key]["jmlkomen"] + ' komentar &nbsp;';
+								  if(unlike==0) { datalist += '<a href="javascript:like(\''+dl[key]["postid"]+'\');"><i class="fal fa-thumbs-up" style="font-size:14px;"></i>&nbsp;' + dl[key]["jmlLike"] + ' disukai</a>'; }
+								  else { datalist += '<a href="javascript:unlike(\''+dl[key]["postid"]+'\');"><i class="fal fa-thumbs-up" style="font-size:14px;"></i>&nbsp;' + dl[key]["jmlLike"] + ' disukai</a>'; }
+								  datalist += '</small></div>';
+								  datalist += '</div><div id="myModal-'+dl[key]["postid"]+'" class="modal"><div class="modal-content"><p>';
+								  if(hapus==1) { datalist += '<button class="btn-menu  waves-effect" onclick="deletepost(\''+dl[key]["postid"]+'\');">Hapus Postingan</button>'; }
+								  datalist += '<button class="btn-menu  waves-effecte" onclick="hidedialog(\''+dl[key]["postid"]+'\'); void(\'\');">Tutup</button>';
+								  datalist += '</p></div></div> <div class="comments"><ul class="comments-list">';
+							
+								  //Komentar
+								  var dt = dl[key]['datakomen'];
+								   for (var key1 in dt) {
+									if (dt.hasOwnProperty(key1)) {
+									  var gambar = dt[key1]['gambar'];
+									  var hapuskomen = dt[key1]['hapus'];
+									  datalist += '<li id="comment-'+dt[key1]["id"]+'\'">';
+									  if(gambar!=null){ datalist += '<img  class="avatar circle" onclick="javascript:fade(\'profile.html?action=read&username='+dt[key1]["oleh"]+'\')" src="' + gambar + '" alt="" />';  }
+									  datalist += ' <div class="comment-body"><span class="author" onclick="javascript:fade(\'profile.html?action=read&username='+dt[key1]["oleh"]+'\')"><strong>'+dt[key1]["nama"]+'</strong></span>';
+									  if(hapuskomen==1) { datalist += ' <small style="color:#ccc"><a onclick="deletekomen(\''+dl[key]["postid"]+'\',\''+dt[key1]["id"]+'\');">hapus</a></small>'; }
+									  datalist += '<br><span class="small">'+dt[key1]["tgltampil1"]+'</span>';
+									  datalist += '<p>'+dt[key1]["komentar"]+'';
+									  datalist += '</p></div><li>';
+									}
+								  }	
+								  datalist += '<li class="your-comment"><img src="'+localStorage.avatar+'" alt="" class="avatar circle">';
+								  datalist += '<span class="author"><strong>'+localStorage.userfullname+'</strong></span><textarea id="textarea1"  class="materialize-textarea" placeholder="Write your comment..."></textarea><button onclick="kirimkomentar();" id="kirimkomentar" class="btn btn-default waves-effect waves-light">Kirimkan Komentar</button>';
+              					  datalist += '</li></ul></div>';
+							  
+							  	}
+							  }
+							   $("#load_data").append(datalist);
+							   					
+							
+					  }
+				 }
+			  });
+        
+        });
+		
+		//Like
+		function like(id)
+		{
+			var urls ="https://www.dfunstation.com/api4/android/index.php/member/like/"+localStorage.userid+"/"+id+"/?callback=?";
+			$.ajax({
+			  type: "GET",
+			  url: urls,
+			  crossDomain: true,
+			  cache: false,
+			  success: function(data){
+			  	
+				  if(data['status']=="OK")
+				  {
+					slide("post-read.html?action=read&id="+id);
+				  }
+				 }
+			  });
+		}
+		function unlike(id)
+		{
+			var urls ="https://www.dfunstation.com/api4/android/index.php/member/unlike/"+localStorage.userid+"/"+id+"/?callback=?";
+			$.ajax({
+			  type: "GET",
+			  url: urls,
+			  crossDomain: true,
+			  cache: false,
+			  success: function(data){
+			  	
+				  if(data['status']=="OK")
+				  {
+					slide("post-read.html?action=read&id="+id);
+				  }
+				 }
+			  });
+		}
+		
+		//Kirim Komentar
+		function kirimkomentar()
+		{
+			
+			var urls="https://www.dfunstation.com/api4/android/index.php/member/addkomen/?callback=?";
+			
+			var komentar = $("#textarea1").val();
+			var postid = $("#postid").val();
+			
+			
+			if($.trim(komentar).length<3){ alert("Komentar masih kosong atau terlalu pendek"); }
+		
+			var dataString="komentar="+komentar+"&userid="+localStorage.userid+"&postid="+postid;
+	
+			if($.trim(komentar).length>3)
+			{
+				$.ajax({
+					type: "POST",
+					url: urls,
+					data: dataString,
+					crossDomain: true,
+					cache: false,
+					beforeSend: function(){ $("#kirimkomentar").val('Mengirimkan...');},
+					success: function(data){
+						
+						if(data['status']=="OK")
+						{
+							slide("post-read.html?action=read&id="+postid);						
+						}
+						else if(data['status']=="ERROR")
+						{
+							alert(data['message']);
+						}
+					}
+				});
+			}return false;
+	
+		}
+		
+		
+		function showdialog(id)
+		{
+			var modal = document.getElementById('myModal-'+id);
+			var span = document.getElementsByClassName("close")[0];
+			modal.style.display = "block";
+			return false;
+		}
+		function hidedialog(id)
+		{
+			var modal = document.getElementById('myModal-'+id);
+			var span = document.getElementsByClassName("close")[0];
+			modal.style.display = "none";
+			return false;
+		}
+		function deletepost(id)
+		{
+			var urls ="https://www.dfunstation.com/api4/android/index.php/member/delpost/"+localStorage.userid+"/"+id+"/?callback=?";
+			$.ajax({
+			  type: "GET",
+			  url: urls,
+			  crossDomain: true,
+			  cache: false,
+			  success: function(data){
+			  	
+				  if(data['status']=="OK")
+				  {
+					slide("home.html");
+				  }
+				 }
+			  });
+		}
+		function deletekomen(postid,id)
+		{
+			var urls ="https://www.dfunstation.com/api4/android/index.php/member/delkomen/"+localStorage.userid+"/"+postid+"/"+id+"/?callback=?";
+			$.ajax({
+			  type: "GET",
+			  url: urls,
+			  crossDomain: true,
+			  cache: false,
+			  success: function(data){
+			  	
+				  if(data['status']=="OK")
+				  {
+					slide("post-read.html?action=read&id="+postid);
+				  }
+				 }
+			  });
+		}
+		
+		</script><br><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+ </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/functions.js"></script>
+  </body>
+</html>

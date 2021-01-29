@@ -1,0 +1,75 @@
+.img-termometer {
+  margin-top: 70px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.isi {
+  padding-left: 20px;
+}
+
+.judul {
+  font-weight: bold;
+  font-size: 220%;
+  margin-top: -2px;
+  color: #696666;
+}
+
+.isi-judul {
+  margin-top: 30px;
+  font-family: "Rubik", Arial, Helvetica, sans-serif;
+  padding-right: 40px;
+  color: #555555;
+}
+
+.isi-judul span {
+  font-weight: bold;
+}
+
+.isi-form {
+  border-radius: 3px;
+  border-top: 6px solid #999997;
+  border-left: 1px solid rgb(153, 153, 151, 0.3);
+  border-right: 1px solid rgb(153, 153, 151, 0.3);
+  margin: 20px 15px 0px 15px;
+  padding: 10px 10px 0 10px;
+}
+
+.isi-form-p {
+  font-family: "Rubik", Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  color: #555555;
+}
+
+.jk {
+  color: #999997;
+}
+
+/* Tes Termometer */
+
+.isi-box {
+  border-radius: 3px;
+  border: 1px solid rgb(153, 153, 151, 0.3) ;
+  padding-bottom: 26px;
+}
+
+.nomor-tes {
+  background-color: #eea236;
+  color: white;
+  font-size: 20px;
+  padding-left: 7px;
+  padding-right: 3px;
+  margin-right: 8px;
+}
+
+.pertanyaan {
+  font-size: 18px;
+}
+
+.pemilihan {
+  margin-left: -15px;
+}
+
+.warna-box {
+  background-color: #fbfac4
+}

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>d'Fun Station</title>
+  <meta content="IE=edge" http-equiv="x-ua-compatible" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta content="yes" name="apple-mobile-web-app-capable" />
+  <meta content="yes" name="apple-touch-fullscreen" />
+  <!-- Fonts -->
+  <!-- Styles -->
+  <link href="css/keyframes.css" rel="stylesheet" type="text/css" />
+  <link href="css/materialize.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/swiper.css" rel="stylesheet" type="text/css" />
+  <link href="css/swipebox.min.css" rel="stylesheet" type="text/css" />
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/termometer.css" rel="stylesheet" type="text/css" />
+  <script src="js/jquery.js"></script>
+  <script src="js/fastclick.js"></script>
+  <script src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/iscroll.js"></script>
+  <script type="text/javascript" src="js/datedropper.pro.min.js"></script>
+  <script type="text/javascript" src="controller/depresi_daftar.js"></script>
+  <style>
+    .picker{
+      position: relative;
+    }
+    div.datedropper .picker ul.pick .pick-arw {
+        opacity: 1;
+    }
+    div.datedropper {
+      --dd-color1: #669820;
+      --dd-color2: #FFF;
+      --dd-color3: #4D4D4D;
+      --dd-color4: #FFF;
+
+      --dd-radius: 8px;
+      --dd-width: 180px;
+      --dd-shadow: 0 0 32px 0px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="m-scene" id="main">
+    <!-- Page Content -->
+    <div id="content" class="grey-blue page" style="margin-top: 0px !important; padding-top: 56px">
+      <!-- Toolbar -->
+      <div id="toolbar" class="primary-color">
+        <a href="javascript:slide('index.html');" class="open-left waves-effect waves-circle">
+          <i class="fal fa-arrow-left"></i>
+        </a>
+        <span class="title">Termometer Depresi</span>
+      </div>
+
+      <div class="container">
+        <img src="img/img.tesdepresi.jpg" class="img-termometer" alt="Tes Mandiri Dfunstation" />
+      </div>
+      <div class="container isi">
+        <h2 class="judul">
+          Termometer
+          <br />
+          Depresi
+        </h2>
+        <p class="isi-judul">
+          <strong>BDI-II Bahasa Indonesia</strong>
+          <br>
+          <br>
+          Pengembangan tes ini merupakan kerjasama antara Pojok Psikologi
+          Bandung, d'Fun Station, IPK Jabar dan HIMPSI Jabar.
+        </p>
+        <p class="isi-judul">
+          <span>Konsultan Ahli:</span>
+          <br />
+          Dr. Henndy Ginting, S.Psi., M.Si., Psikolog
+          <br />
+          Robert O. Rajagukguk, Ph.D., Psikolog
+        </p>
+      </div>
+
+      <div class="isi-form">
+        <div class="tabs">
+          <div class="tab tab-active waves-effect waves-ripple">
+            Daftar
+          </div>
+          <div class="tab waves-effect waves-ripple">
+            Tes
+          </div>
+          <div class="tab waves-effect waves-ripple">
+            Hasil
+          </div>
+        </div>
+        <br />
+        <p class="isi-form-p">
+          Sebelum melakukan tes mandiri, berkenan untuk melengkapi informasi
+          dibawah ini dengan lengkap dan benar terlebih dahulu.
+        </p>
+
+        <!-- Form -->
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="nama_lengkap" type="text" class="validate" autocomplete="off" required />
+            <label for="nama_lengkap"> <strong>Nama Lengkap</strong></label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate" autocomplete="off" required />
+            <label for="email"> <strong>Email</strong></label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="telepon" type="number" class="validate" autocomplete="off" required />
+            <label for="telepon"> <strong>Telepon</strong></label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <strong class="jk">jenis Kelamin</strong>
+            <select id="jenis_kelamin" class="browser-default" required>
+              <option value="" disabled selected>
+                <p class="jk">--Pilih--</p>
+              </option>
+              <option value="laki-laki">laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- <div class="row">
+          <div class="input-field  col s12 ">
+            <strong class="jk">Tanggal lahir</strong>
+            <input id="tanggal_lahir" type="date" required class="datepicker">
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="input-field  col s12 ">
+            <strong  class="jk">Tanggal Lahir</strong>
+          </div>
+          <div style="margin-top: 15px;" class="input-field  col s12 ">
+            <strong class="jk">TL</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input  class="validate" id="tanggal_lahir" type="type" data-dd-large-only="true" placeholder="Tanggal Lahir" required onchange="dob(this.value)">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <strong class="jk">Status</strong>
+            <select id="status" class="browser-default" required>
+              <option value="" class="jk" disabled selected>--Pilih--</option>
+              <option value="Belum Menikah">Belum Menikah</option>
+              <option value="Menikah">Menikah</option>
+              <option value="Duda">Duda</option>
+              <option value="Janda">Janda</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <strong class="jk">Provinsi</strong>
+            <select id="provinsi" class="browser-default" required>
+              <!-- <option value="" class="jk" disabled selected>--Pilih--</option>
+              <option value="Jawa Barat">Jawa Barat</option> -->
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <strong class="jk">Kota / kabupaten</strong>
+            <select id="kotaid" class="browser-default" required>
+              <!-- <option value="" class="jk" disabled selected>--Pilih--</option>
+              <option value="Bandung">Bandung</option> -->
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <strong class="jk">pendidikan</strong>
+            <select id="pendidikan" class="browser-default" required>
+              <option value="" class="jk" disabled selected>--Pilih--</option>
+              <option value="SD">SD</option>
+              <option value="SLTP">SLTP</option>
+              <option value="SLTA">SLTA</option>
+              <option value="D3">D3</option>
+              <option value="S1">S1</option>
+              <option value="S2">S2</option>
+              <option value="S3">S3</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <input id="pekerjaan" type="text" class="validate" autocomplete="off" required />
+            <label for="pekerjaan"> <strong>Pekerjaan</strong></label>
+          </div>
+        </div>
+
+
+
+
+        <button
+          class="waves-effect waves-light btn-large accent-color width-100 m-b-20 animated bouncein delay-4 button button-block button-positive"
+          id="signup">Mulai Tes Mandiri</button>
+
+
+      </div>
+
+      <!-- Main Content -->
+      <div class="animated fadein" id="bloglist"></div>
+      <br /><br />
+      <!-- <div class="steps-controllers">
+        <div class="waves-effect waves-ripple">
+          <a href="javascript:fade('index.html')"><span class="menubuttom"><span
+                class="fal fa-home-alt"></span></span><br />Home</a>
+        </div>
+        <div class="waves-effect waves-ripple">
+          <a href="javascript:fade('transaksi.html')"><span class="menubuttom"><span
+                class="fal fa-list-alt"></span></span><br />Transaksi</a>
+        </div>
+        <div class="waves-effect waves-ripple">
+          <a href="javascript:fade('promo.html')"><span class="menubuttom"><span
+                class="fal fa-star"></span></span><br />Promo</a>
+        </div>
+        <div class="waves-effect waves-ripple">
+          <a href="javascript:fade('chat.html')"><span class="menubuttom"><span
+                class="fal fa-comment-alt-lines"></span></span><br />Chat</a>
+        </div>
+        <div class="waves-effect waves-ripple">
+          <a href="javascript:fade('setting.html')"><span class="menubuttom"><span
+                class="fal fa-user"></span></span><br />Akun</a>
+        </div>
+      </div> -->
+    </div>
+    <!-- End of Page Container -->
+
+
+
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>
+    <script src="js/jquery.smoothState.min.js"></script>
+    <script src="js/materialize.min.js"></script>
+    <script src="js/swiper.min.js"></script>
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/functions.js"></script>
+
+</body>
+
+</html>

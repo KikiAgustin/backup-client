@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<title>d'Fun Station</title>
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	<!-- Fonts -->
+	<!-- Icons -->
+
+	<!-- Styles -->
+	<link href="css/keyframes.css" rel="stylesheet" type="text/css">
+	<link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+	<link href="css/swiper.css" rel="stylesheet" type="text/css">
+	<link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+		var url = window.location.pathname;
+		var filename = url.substring(url.lastIndexOf('/') + 1);
+		//var verification_id = '1';
+
+		if (localStorage.login == "true" && filename == 'login.html') {
+			window.location.href = "index.html";
+			var userfullname = localStorage.userfullname;
+		} else if (localStorage.login == null) {
+			window.location.href = "login.html";
+		} else if (localStorage.login == "false" && filename != 'login.html') {
+			window.location.href = "login.html";
+		}
+	</script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+
+
+</head>
+
+<body>
+	<div class="m-scene bg-ff" id="main">
+		<!-- Main Container -->
+
+
+
+		<!-- Page Content -->
+		<div id="content">
+
+			<!-- Toolbar -->
+			<div id="toolbar" class="toolbarhome primary-color" style="background-color:#eba009 !important;">
+
+				<span class="title"> Peer Consultation</span>
+				<div class="open-right waves-effect waves-circle">
+					<a href="notifikasi.html" class="waves-effect waves-circle"><i class="fal fa-bell"></i></a>
+				</div>
+				<div class="open-right waves-effect waves-circle">
+					<a href="#" onclick="reset()" class="waves-effect waves-circle"><i class="fal fa-sync"></i></a>
+				</div>
+			</div>
+
+			<div id="wrapper">
+				<div id="scroller">
+
+					<div class="homebox" style="background-color:#eba009 !important;">
+
+						<div class="menu-profile">
+
+						</div>
+
+					</div>
+
+
+					<!-- Main Content -->
+					<div class="menukonsulbox ">
+
+						<div class="menukonsul animated fadein">
+							<div class="menukonsul-judul">
+								<div class="menukonsul-icon" style="background-color:#eba009 !important;"><i
+										class="fal fa-heart"></i></div>
+								<strong>Chat dengan teman dari mahasiswa</strong><br>
+								<!-- <span>Konsultasi psikologi gratis masalah Anda selama masa darurat Covid-19.</span> -->
+								<!-- <span>Konsultasi psikologi gratis masalah Anda.</span> -->
+							</div>
+
+							<div class="konsulsec">
+								<a href="javascript:fade('peer_konsul.html')" class="active">Daftar Mahasiswa</a>
+								<a href="javascript:fade('peer-chat-group.html')"> Chat Group</a>
+							</div>
+							<!-- <div class="tabs">
+								<div class="tab tab-active waves-effect waves-ripple"
+									onClick="javascript:fade('peer_konsul.html');">
+									Daftar Mhs</div>
+								<div class="tab waves-effect waves-ripple"
+									onClick="javascript:fade('peer-chat-group.html');">Group</div>
+								<div class="tab waves-effect waves-ripple"
+									onClick="javascript:fade('mading_peer.html');">Mading</div>
+							</div> -->
+
+							<div class="listkonsultan">
+								<div id="load_data"></div>
+								<div id="load_data_message"></div>
+							</div>
+
+
+
+						</div>
+					</div>
+
+
+					<script>
+						function reset() {
+							var limit = 5;
+							var start = 0;
+							var action = 'inactive';
+
+							var lastid = "";
+							var urls = "https://www.dfunstation.com/api4/android/index.php/peer/konsultan/0/0/" + start + "/" + limit + "/" + localStorage.userid + "/peer/?callback=?";
+							$.ajax({
+								type: "POST",
+								url: urls,
+								crossDomain: true,
+								cache: false,
+								success: function (data) {
+									if (data['status'] == "OK") {
+										var verification = "";
+										var urls2 = "https://www.dfunstation.com/api4/android/index.php/profile/profile/" + localStorage.userid + "/?callback=?";
+										$.ajax({
+											type: "GET",
+											url: urls2,
+											crossDomain: true,
+											cache: false,
+											success: function (datas) {
+												if (datas['status'] == "OK") {
+													//alert('ok');
+													var d = new Date(),
+														month = '' + (d.getMonth() + 1),
+														day = '' + d.getDate(),
+														year = d.getFullYear();
+
+													if (month.length < 2)
+														month = '0' + month;
+													if (day.length < 2)
+														day = '0' + day;
+
+													var dt = [year, month, day].join('-');
+													if (datas['usia'] < 18) {
+														var datalist = "";
+														var dl = data['datalist'];
+														var jml = dl.length;
+														if (jml > 0) {
+															$('#load_data_message').html("");
+															for (var key in dl) {
+																if (dl.hasOwnProperty(key)) {
+																	var online = dl[key]["online"];
+																	var busy = dl[key]["busy"];
+																	var chatid = dl[key]["chatid"];
+
+																	if (chatid > 0) {
+																		datalist += '<div class="konsultan-item waves-effect waves-ripple animated fadein" onclick="fade(\'chat-start.html?action=read&chatid=' + dl[key]["chatid"] + '&userid=' + dl[key]["id"] + '\')">';
+																	} else {
+																		datalist += '<div class="konsultan-item waves-effect waves-ripple animated fadein" onclick="fade(\'peer-konsul-profile\.html?action=read&userid=' + dl[key]["id"] + '\')">';
+																	}
+																	datalist += '<div class="konsultan-item-img">';
+																	datalist += '<div class="konsultan-item-imgbox"><img src="' + dl[key]["avatar"] + '"></div>';
+																	datalist += '</div>';
+																	datalist += '<div class="konsultan-item-info">';
+																	datalist += '<span class="chatnama">' + dl[key]["nama"] + '</span><br>';
+																	datalist += '' + dl[key]["sec"] + '<br>';
+
+																	datalist += '<span class="chatm">Gratis</span>';
+
+																	var rate = "";
+																	for (i = 0; i < dl[key]["rating"]; i++) {
+																		rate += '<i class="fal fa-star"></i>';
+																	}
+
+																	datalist += '<br><span class="chatrating">' + rate + '</div>';
+																	datalist += '<div class="konsultan-item-status">';
+
+																	if (chatid > 0) {
+																		datalist += '<div class="konsultan-item-status-online">open</div>';
+																	} else {
+																		if (busy > 0) { datalist += '<div class="konsultan-item-status-online" style="background:red !important">busy</div>'; }
+																		else {
+																			if (online > 0) { datalist += '<div class="konsultan-item-status-online">online</div>'; }
+																			else { datalist += '<div class="konsultan-item-status-offline">offline</div>'; }
+																		}
+																	}
+
+																	datalist += '</div></div>';
+																	delete (rate);
+																}
+															}
+															$("#load_data").html(datalist);
+															delete (datalist);
+														} else {
+															$("#load_data").html('<h3 style="text-align:center">-- Tidak ada data --</h3>');
+														}
+														if (datalist == '') {
+															$('#load_data_message').html("");
+															action = 'active';
+														} else {
+															$('#load_data_message').html("");
+															action = "inactive";
+														}
+													} else {
+														verification += '<div class="konsultan-item waves-effect waves-ripple animated fadein">';
+														verification += '<div class="p-20">';
+														if (datas['usia'] > 18) {
+															verification += 'Fitur ini hanya bisa diaksese oleh usia dibawah 18 tahun';
+															verification += '<br><br>';
+														}
+														verification += '</div>';
+														verification += '</div>';
+														$("#load_data").html(verification);
+														if (verification == '') {
+															$('#load_data_message').html("");
+															action = 'active';
+														} else {
+															$('#load_data_message').html("");
+															action = "inactive";
+														}
+													}
+												}
+											}
+										});
+									}
+								}
+							});
+						}
+						$(document).ready(function () {
+
+							loading("load_data_message", 3);
+
+							var limit = 5;
+							var start = 0;
+							var action = 'inactive';
+
+							var lastid = "";
+
+							function load_country_data(limit, start) {
+								var urls = "https://www.dfunstation.com/api4/android/index.php/peer/konsultan/0/0/" + start + "/" + limit + "/" + localStorage.userid + "/peer/?callback=?";
+								$.ajax({
+									type: "POST",
+									url: urls,
+									crossDomain: true,
+									cache: false,
+									success: function (data) {
+										if (data['status'] == "OK") {
+											var verification = "";
+											var urls2 = "https://www.dfunstation.com/api4/android/index.php/profile/profile/" + localStorage.userid + "/?callback=?";
+											$.ajax({
+												type: "GET",
+												url: urls2,
+												crossDomain: true,
+												cache: false,
+												success: function (datas) {
+													if (datas['status'] == "OK") {
+														//alert('ok');
+														var d = new Date(),
+															month = '' + (d.getMonth() + 1),
+															day = '' + d.getDate(),
+															year = d.getFullYear();
+
+														if (month.length < 2)
+															month = '0' + month;
+														if (day.length < 2)
+															day = '0' + day;
+
+														var dt = [year, month, day].join('-');
+														if (datas['usia'] < 18) {
+															var datalist = "";
+															var dl = data['datalist'];
+															var jml = dl.length;
+															if (jml > 0) {
+																$('#load_data_message').html("");
+																for (var key in dl) {
+																	if (dl.hasOwnProperty(key)) {
+																		var online = dl[key]["online"];
+																		var busy = dl[key]["busy"];
+																		var chatid = dl[key]["chatid"];
+
+																		if (chatid > 0) {
+																			datalist += '<div class="konsultan-item waves-effect waves-ripple animated fadein" onclick="fade(\'chat-start.html?action=read&chatid=' + dl[key]["chatid"] + '&userid=' + dl[key]["id"] + '\')">';
+																		} else {
+																			datalist += '<div class="konsultan-item waves-effect waves-ripple animated fadein" onclick="fade(\'peer-konsul-profile\.html?action=read&userid=' + dl[key]["id"] + '\')">';
+																		}
+																		datalist += '<div class="konsultan-item-img">';
+																		datalist += '<div class="konsultan-item-imgbox"><img src="' + dl[key]["avatar"] + '"></div>';
+																		datalist += '</div>';
+																		datalist += '<div class="konsultan-item-info">';
+																		datalist += '<span class="chatnama">' + dl[key]["nama"] + '</span><br>';
+																		datalist += '' + dl[key]["sec"] + '<br>';
+
+																		datalist += '<span class="chatm">Gratis</span>';
+
+																		var rate = "";
+																		for (i = 0; i < dl[key]["rating"]; i++) {
+																			rate += '<i class="fal fa-star"></i>';
+																		}
+
+																		datalist += '<br><span class="chatrating">' + rate + '</div>';
+																		datalist += '<div class="konsultan-item-status">';
+
+																		if (chatid > 0) {
+																			datalist += '<div class="konsultan-item-status-online">open</div>';
+																		} else {
+																			if (busy > 0) { datalist += '<div class="konsultan-item-status-online" style="background:red !important">busy</div>'; }
+																			else {
+																				if (online > 0) { datalist += '<div class="konsultan-item-status-online">online</div>'; }
+																				else { datalist += '<div class="konsultan-item-status-offline">offline</div>'; }
+																			}
+																		}
+
+																		datalist += '</div></div>';
+																		delete (rate);
+																	}
+																}
+																$("#load_data").append(datalist);
+																delete (datalist);
+															} else {
+																$("#load_data").append('<h3 style="text-align:center">-- Tidak ada data --</h3>');
+															}
+															if (datalist == '') {
+																$('#load_data_message').html("");
+																action = 'active';
+															} else {
+																$('#load_data_message').html("");
+																action = "inactive";
+															}
+														} else {
+															verification += '<div class="konsultan-item waves-effect waves-ripple animated fadein">';
+															verification += '<div class="p-20">';
+															if (datas['usia'] > 18) {
+																verification += 'Maaf Fitur ini hanya bisa diakses oleh usia dibawah 18 tahun';
+																verification += '<br><br>';
+															}
+															verification += '</div>';
+															verification += '</div>';
+															$("#load_data").append(verification);
+															if (verification == '') {
+																$('#load_data_message').html("");
+																action = 'active';
+															} else {
+																$('#load_data_message').html("");
+																action = "inactive";
+															}
+														}
+													}
+												}
+											});
+										}
+
+
+									}
+								});
+							}
+
+							if (action == 'inactive') {
+								action = 'active';
+								load_country_data(limit, start);
+							}
+
+							$("#content").scroll(function () {
+								if ($("#content").scrollTop() + $("#content").height() > $("#load_data").height() && action == 'inactive') {
+									action = 'active';
+									start = start + limit;
+									setTimeout(function () {
+										load_country_data(limit, start);
+									}, 1000);
+								}
+							});
+
+						});
+					</script>
+
+
+
+				</div> <!-- End of Main Contents -->
+
+
+			</div> <!-- End of Page Content -->
+
+		</div> <!-- End of Page Container -->
+
+		<div class="steps-controllers">
+			<div class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span
+						class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+			<div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span
+						class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+			<div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span
+						class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+			<div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span
+							class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+			<div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span
+						class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+		</div>
+
+
+
+
+
+
+		<script type="text/javascript" src="cordova.js"></script>
+
+		<script src="js/jquery.swipebox.min.js"></script>
+		<script src="js/jquery.smoothState.min.js"></script>
+		<script src="js/materialize.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script src="js/jquery.mixitup.min.js"></script>
+		<script src="js/masonry.min.js"></script>
+		<script src="js/chart.min.js"></script>
+		<script src="js/functions.js"></script>
+
+</body>
+
+</html>

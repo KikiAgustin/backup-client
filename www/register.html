@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <title>d'Fun Station</title>
+  <meta content="IE=edge" http-equiv="x-ua-compatible">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta content="yes" name="apple-mobile-web-app-capable">
+  <meta content="yes" name="apple-touch-fullscreen">
+  <!-- Fonts -->
+  <!-- Icons -->
+  <!-- Styles -->
+  <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+  <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+  <link href="css/swiper.css" rel="stylesheet" type="text/css">
+  <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="js/fastclick.js"></script>
+  <script type="text/javascript" src="js/sweetalert.min.js"></script>
+  <script type="text/javascript" src="js/iscroll.js"></script>
+  <script type="text/javascript" src="js/overlay.js"></script>
+  <script type="text/javascript" src="js/datedropper.pro.min.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="controller/register.js"></script>
+  <style>
+    .picker{
+      position: relative;
+    }
+    div.datedropper .picker ul.pick .pick-arw {
+        opacity: 1;
+    }
+    div.datedropper {
+      --dd-color1: #669820;
+      --dd-color2: #FFF;
+      --dd-color3: #4D4D4D;
+      --dd-color4: #FFF;
+
+      --dd-radius: 8px;
+      --dd-width: 180px;
+      --dd-shadow: 0 0 32px 0px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body style="background: #5c8c20 !important;">
+  <div class="m-scene" id="main-login">
+
+    <!-- Toolbar -->
+    <div id="toolbar" class="primary-color animated fadein">
+      <a href="login.html" class="open-left waves-effect waves-circle">
+        <i class="fal fa-arrow-left"></i>
+      </a>
+      <span class="title">Mendaftar</span>
+    </div>
+
+
+    <!-- Page Content -->
+    <div id="content-login" class="login" style="background: url(img/bg.main.png) top right repeat-x #5c8c20;">
+
+      <!-- Main Content -->
+      <div class="login-form animated fadein delay-2" style="top:0px">
+
+        <div class="padding" style="margin:00px 0px 20px 0px;">
+          Silahkan masukan informasi pendaftaran anda dengan lengkap dan benar pada form dibawah ini</div>
+
+
+        <div class="input-field">
+          <i class="fal fa-user prefix"></i>
+          <input class="validate" id="username" type="text" placeholder="Username" required>
+        </div>
+        <div class="input-field">
+          <i class="fal fa-envelope prefix"></i>
+          <input class="validate" id="useremail" type="email" placeholder="Alamat Email" required>
+        </div>
+        <div class="input-field">
+          <i class="fal fa-key prefix"></i>
+          <input class="validate" id="userpassword" type="password" placeholder="Password" required>
+          <span onClick="SeePass();" class="fal fa-eye field-icon toggle-password"></span>
+        </div>
+        <div class="input-field">
+          <i class="fal fa-user prefix"></i>
+          <input class="validate" id="userfullname" type="text" placeholder="Nama Lengkap" required>
+        </div>
+        <div class="input-field">
+          <i class="fal fa-calendar prefix"></i>
+          <input class="validate" id="userbirth" type="type" data-dd-large-only="true" placeholder="Tanggal Lahir" required onchange="dob(this.value)">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<small>*Tanggal Lahir</small> 
+        </div>
+        <div class="input-field">
+          <i class="fal fa-mobile prefix"></i>
+          <input class="validate" id="userphonegsm" type="text" placeholder="Nomor Handphone">
+        </div>
+        <div class="input-field" id="chk" style="display: none;">
+          <!-- <input type="radio" id="usia18" name="usia" value="1" class="browser-default" style="display:block; visibility:visible; left:0px;margin-right:15px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saya sudah lebih dari 18 tahun<br/> -->
+          <input class="browser-default" id="usia18_" value="1" type="checkbox" style="display:block; visibility:visible; left:0px;margin-right:15px" required>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Usia Saya kurang dari 18 tahun dan di bawah pengawasan orang tua
+          <!-- <input class="browser-default" id="lebih18tahun" value="1" type="checkbox" style="display:block; visibility:visible; left:0px;margin-right:15px">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Saya sudah lebih dari 18 tahun<br/>
+          <small>*Ceklist bagian ini jika usia Anda sudah lebih dari 18 tahun</small> -->
+        </div> 
+        <br clear="all">
+
+
+        <button
+          class="waves-effect waves-light btn-large accent-color width-100 m-b-20 animated bouncein delay-4 button button-block button-positive"
+          id="signup">Daftar Sekarang</button>
+
+      </div><!-- End of Main Contents -->
+
+
+    </div> <!-- End of Page Content -->
+
+
+  </div> <!-- End of Page Container -->
+  <script src="js/jquery.swipebox.min.js"></script>
+  <script src="js/jquery.smoothState.min.js"></script>
+  <script src="js/materialize.min.js"></script>
+  <script src="js/swiper.min.js"></script>
+  <script src="js/jquery.mixitup.min.js"></script>
+  <script src="js/functions.js"></script>
+  <script src="cordova.js"></script>
+</body>
+
+</html>

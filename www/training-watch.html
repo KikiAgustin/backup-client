@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+      <script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+ 
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	
+    </script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+    
+
+  <script type="text/javascript" src="js/iscroll.js"></script>
+	
+</head>
+
+  <body>
+    <div class="m-scene" id="main">
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+           <a href="#" id="linkutama" class="open-left  waves-effect waves-circle">
+            <i class="fal fa-arrow-left"></i>
+          </a>
+           <span class="title">d'Fun Station Online</span>
+          </div>
+        </div>
+        
+		<script>
+			 var secid = getvar("secid");
+			 
+			 var strLink = "javascript:slide('training-read.html?id="+secid+"');";
+			 $("#linkutama").attr("href",strLink);
+	
+			  var id = getvar("id");
+			
+			  var urls ="https://www.dfunstation.com/api4/android/index.php/training/watch/"+id+"/"+localStorage.userid+"/?callback=?";
+		
+			  $.ajax({
+				  type: "GET",
+				  url: urls,
+				  crossDomain: true,
+				  cache: false,
+				  success: function(data){
+				  	
+					  var datalist;
+					  
+					  datalist = "";
+					  
+					  if(data['status']=="PRE")
+					  {
+						  datalist += '<div class="animated fadein bg-9b">';
+						  datalist += '<div class="p-20"><br><br><br><center>'+data["message"]+'</div>';
+						  datalist += '<div class="p-20"><p><a href="javascript:fade(\'upgrade.html\')" class="waves-effect waves-light btn-large accent-color width-100 m-b-20 animated bouncein delay-4 button button-block button-positive">Upgade ke Premium</a></p></div><br clear="all" />';						
+						  
+						  $("#training-read").append(datalist);
+						  delete(datalist);
+					  }
+					  else if(data['status']=="OK")
+					  {
+						  var video = data['detailvideo'];
+						  var gambar = data['detailgambar'];
+						  var jenis = data['detailjenis'];
+						  var youtubeid = data['detailyoutubeid'];
+						  
+						  
+						  datalist += '<div class="animated fadein bg-9b">';
+						  if(jenis=="video")
+						  {  
+						  	if(youtubeid!==null) datalist += '<div class="training-read-video"><iframe width="100%" height="250" src="http://www.youtube.com/embed/'+youtubeid+'?feature=player_embedded" frameborder="0" allowfullscreen></iframe></div>'; 
+							else if(video!==null) datalist += '<div class="training-read-video"><video controls autoplay><source src="'+video+'" type="video/mp4">Your browser does not support the video tag./video></div>'; 
+						  }
+						  else if(jenis=="audio") {  if(video!==null) datalist += '<div class="training-read-audio"><audio controls autoplay><source src="'+video+'" type="audio/mp4">Your browser does not support the video tag./audio></div>'; }
+            			  else { if(gambar!==null) datalist += '<div class="training-read-video"><img src="' + data['detailgambar'] + '" alt="" /><div>'; }
+						  datalist += '<br clear="all /><div class="blog-fullwidth animated fadein delay-1">';
+						  datalist += '</div><div class="training-preview-1 bg-white"><strong>'+data["detailnama"]+'</strong><br>'+data["detailringkas"]+'';
+						  datalist += "";
+						  datalist += '</div><br clear="all" />';						
+						  
+						  
+						  //List Materi
+						  datalist += '<div class="training-preview p-10"><strong>Materi Lainnya</strong></div><div id="test1"><div class="container activity p-l-r-20"><div class="row m-l-0"><div class="col">';	
+						  var dl = data['detailmateri'];
+						 var lastid = "";
+
+						   for (var key in dl) {
+							if (dl.hasOwnProperty(key)) {
+						      
+							  if(dl[key]["jenis"]=="video") var icon = '<span class="date"><i class="fal fa-film-play"></i> Video<br>'+dl[key]["durasi"]+':00 menit</span>';
+							  else if(dl[key]["jenis"]=="audio") var icon = '<span class="date"><i class="fal fa-file-audio"></i> Audio<br>'+dl[key]["durasi"]+':00 menit</span>';
+							  else var icon = '<span class="date"><i class="fal fa-reading"></i> Article</span>';
+							  
+							  if(dl[key]["premium"]=="1") var pre = '<span class="premium">premium</span>';
+							  else var  pre = '<span class="premium-free">free</span>';
+							  
+							  datalist += ' <div class="contact">'+icon+'<div class="dot z-depth-1"></div>';
+							  datalist += '<p><a href="javascript:fade(\'training-watch.html?action=read&id='+dl[key]["id"]+'&secid='+secid+'\')">'+dl[key]["nama"]+'</a></p>';
+							  datalist += ''+pre+'</div>';
+						 
+							}
+						  }
+						 
+						  datalist += '</div></div></div></div>';	
+						  $("#training-read").append(datalist);
+						  delete(datalist);
+						
+					  }
+					 
+				  }
+			  });
+							
+	
+		</script>
+        
+      <!-- Main Content -->
+        <div class="animated fadein" id="training-read"> 
+
+               
+        </div><br><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a href="javascript:fade('index.html')" class="active"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+ </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/functions.js"></script>
+  </body>
+</html>

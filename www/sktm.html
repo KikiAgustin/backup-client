@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<title>Dfun Station</title>
+	<meta content="IE=edge" http-equiv="x-ua-compatible">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta content="yes" name="apple-mobile-web-app-capable">
+	<meta content="yes" name="apple-touch-fullscreen">
+	<!-- Fonts -->
+	<!-- Icons -->
+	<link href="css/ionicons.min.css" media="all" rel="stylesheet" type="text/css">
+	<!-- Styles -->
+	<link href="css/keyframes.css" rel="stylesheet" type="text/css">
+	<link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+	<link href="css/swiper.css" rel="stylesheet" type="text/css">
+	<link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+	<link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script src="js/sweetalert.min.js"></script>
+	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript" src="js/iscroll.js"></script>
+	<script type="text/javascript">
+		var myScroll;
+		function loaded() {
+			myScroll = new IScroll('#content', { mouseWheel: true });
+		}
+	</script>
+</head>
+
+<body>
+	<div class="m-scene" id="main">
+		<!-- Page Content -->
+		<div id="content" class="grey-blue page">
+
+			<!-- Toolbar -->
+			<div id="toolbar" class="primary-color">
+				<a href="javascript:slide('tidakmampu.html');" class="open-left">
+					<i class="fal fa-arrow-left"></i>
+				</a>
+				<span class="title">Foto BPJS</span>
+			</div>
+
+			<div class="box-status1 animated fadeindown">
+
+				<form id="uploadForm" enctype="multipart/form-data">
+
+					<div class="box-status1-input">
+						<div class="imgstatus">
+							<img src="img/avatar.png" id='img' style="width: 100%; height: auto; display:none ">
+						</div>
+						<input type="hidden" name="isimage" id="isimage" value="0">
+					</div>
+					<div class="box-status1-select">
+						<center>
+							<br><br>
+							Unggah foto BPJS Anda di sini<br><br>
+						</center>
+
+						<a id='but_take' href="javascript:void();"
+							class="btn btn-flat post-color waves-effect waves-light" style="width:100%"><span class="fal fa-camera"></span>
+							Camera</a>
+						<!-- <a id='but_select' href="javascript:void();"
+							class="btn btn-flat post-color waves-effect waves-light"><span class="fal fa-image"></span>
+							Galeri Photo</a> -->
+					</div>
+					<div class="box-status1-post" style="display:none">
+						<button
+							class="waves-effect waves-light btn-large accent-color width-100 m-b-20 animated bouncein delay-4 button button-block button-positive"
+							id="kirim">Kirim</button>
+					</div>
+				</form>
+			</div>
+
+		</div> <!-- End of Page Container -->
+
+		<script type="text/javascript" src="controller/sktm.js"></script>
+		<script type="text/javascript" src="cordova.js"></script>
+		<script src="js/jquery.swipebox.min.js"></script>
+		<script src="js/jquery.smoothState.min.js"></script>
+		<script src="js/materialize.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script src="js/jquery.mixitup.min.js"></script>
+		<script src="js/functions.js"></script>
+</body>
+
+</html>

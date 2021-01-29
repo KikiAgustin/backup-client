@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>d'Fun Station</title>
+    <meta content="IE=edge" http-equiv="x-ua-compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="yes" name="apple-touch-fullscreen">
+
+    <!-- Fonts -->
+    <!-- Styles -->
+    <link href="css/keyframes.css" rel="stylesheet" type="text/css">
+    <link href="css/materialize.min.css" rel="stylesheet" type="text/css">
+    <link href="css/swiper.css" rel="stylesheet" type="text/css">
+    <link href="css/swipebox.min.css" rel="stylesheet" type="text/css">
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+	<script src="js/jquery.js"></script>
+	<script src="js/fastclick.js"></script>
+	<script type="text/javascript">
+    
+	var url = window.location.pathname;
+    var filename = url.substring(url.lastIndexOf('/') + 1);
+	
+ 
+    if (localStorage.login == "true" && filename == 'login.html') {
+        window.location.href = "index.html";
+		var userfullname = localStorage.userfullname;
+    } else if (localStorage.login == null) {
+        window.location.href = "login.html";
+    } else if (localStorage.login == "false" && filename != 'login.html') {
+        window.location.href = "login.html";
+    }
+	</script>
+   <script src="js/sweetalert.min.js"></script> <script type="text/javascript" src="js/main.js"></script>
+
+  <script type="text/javascript" src="js/iscroll.js"></script>
+	
+</head>
+
+  <body>
+    <div class="m-scene" id="main">  
+
+    
+      <!-- Page Content -->
+      <div id="content" class="grey-blue page" style="margin-top:0px !important;padding-top:56px">
+
+        <!-- Toolbar -->
+        <div id="toolbar"  class="primary-color">
+         <a href="javascript:history.back();" class="open-left waves-effect waves-circle">
+            <i class="fal fa-arrow-left"></i>
+          </a>
+           <span class="title">Transaksi Upgrade Membership</span>
+        </div>
+        
+        <div class="tabs">
+        	<div class="tab waves-effect waves-ripple" onClick="javascript:fade('transaksi.html');">Konsultasi</div>
+            <div class="tab waves-effect waves-ripple" onClick="javascript:fade('transaksi-voucher.html');">Corner</div>
+            <div class="tab waves-effect waves-ripple tab-active" onClick="javascript:fade('transaksi-upgrade.html');">Upgrade</div>
+        </div>
+ 	
+
+         <!-- Main Content -->
+        <div class="animated fadein" id="bloglist">
+        	<div id="load_data"></div>
+			<div class="p-20"><div id="load_data_message"></div></div>
+        </div> <!-- End of Page Content --> 
+        
+        <script> 
+        $(document).ready(function(){
+		
+		
+				loadingmatch("load_data_message",5);
+ 
+        		var urls ="https://www.dfunstation.com/api4/android/index.php/member/transaksi-upgrade/list/"+localStorage.userid+"/?callback=?";
+				var datalist = "";
+			   
+			  
+			  	$.ajax({
+				  type: "GET",
+				  url: urls,
+				  crossDomain: true,
+				  cache: false,
+				  success: function(data){
+				  
+					  if(data['status']=="OK")
+					  {
+							 $("#load_data_message").html("");
+
+							 var dl = data['notifikasi'];
+
+							var jml = dl.length;
+							console.log(jml);
+							
+							if(jml>0)
+							{
+							  for (var key in dl) {
+								if (dl.hasOwnProperty(key)) {
+								 datalist += '<div class="p-10 animated fadein notif-item waves-effect waves-ripple">';
+								  datalist += '<div style="width:65%; float:left"><p><span class="date">'+dl[key]["tanggal"]+'</span><br><b>'+dl[key]["invoiceid"]+'</b><br> '+dl[key]["nama"]+'</p></div>';
+								  datalist += '<div style="width:30%; float:right"><p><br>Rp.'+dl[key]["totalrp"]+'<br>Status: '+dl[key]["status"]+'</p></div>';
+								  datalist += '</div>';
+							 
+								}
+							  }
+							  $("#load_data").append(datalist);
+							 $("#load_data_message").html("");	
+							}
+														
+							
+					  }
+				 }
+			  });
+        
+         
+        });
+		
+		
+	
+        </script>
+        
+        
+        
+		</div><br><br><div class="steps-controllers">
+              <div  class="waves-effect waves-ripple"><a href="javascript:fade('index.html')"><span class="menubuttom"><span class="fal fa-home-alt"></span></span><br>Home</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('transaksi.html')" class="active"><span class="menubuttom"><span class="fal fa-list-alt"></span></span><br>Transaksi</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('promo.html')"><span class="menubuttom"><span class="fal fa-star"></span></span><br>Promo</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('chat.html')"><span class="menubuttom"><span class="fal fa-comment-alt-lines"></span></span><br>Chat</a></div>
+              <div class="waves-effect waves-ripple"><a href="javascript:fade('setting.html')"><span class="menubuttom"><span class="fal fa-user"></span></span><br>Akun</a></div>
+       </div>
+ </div> <!-- End of Page Container -->
+    
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="js/jquery.swipebox.min.js"></script>   
+    <script src="js/jquery.smoothState.min.js"></script> 
+    <script src="js/materialize.min.js"></script> 
+    <script src="js/swiper.min.js"></script>  
+    <script src="js/jquery.mixitup.min.js"></script>
+    <script src="js/masonry.min.js"></script>
+    <script src="js/chart.min.js"></script>
+    <script src="js/functions.js"></script>
+ 
+  </body>
+</html>
