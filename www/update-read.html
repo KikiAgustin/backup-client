@@ -74,9 +74,11 @@
 
                         if (data['status'] == "OK") {
                             datalist += '<div class="blog-fullwidth animated fadein delay-1">';
+                            datalist += '<div  class="blog-preview p-20"><h4 style="margin-bottom: 10px; text-align:center;" ><strong >' + data["judul"] + '</strong></h4>';
                             datalist += '<div class="blog-image"><img src="' + data['gambar'] + '" alt="" /></div>';
                             datalist += ' <div style="margin-top: -16px; color: #bec2bf; " class="blog-preview p-20"  ><p>' + data["sumber_gambar"] + '</p></div>';
-                            datalist += '<div style="margin-top: -30px;" class="blog-preview p-20"><h4><strong>' + data["judul"] + '</strong></h4><p><small>' + data["create_date"] + '</small> <small><br>' + data["oleh"] + '</small><br><br>' + data["lengkap"] + '</p>';
+                            datalist += '<p style"text-align:left;"" ><small>' + data["create_date"] + '</small> <small><br>' + data["oleh"] + '</small><br><br>' + data["lengkap"] + '</p>';
+                            datalist += "<a class=\"btn btn-default btn-block\" href=\"javascript:window.plugins.socialsharing.share('" + data['detailnama'] + " - " + data['detailringkas'] + "',null, null, '" + data['detailurl'] + "')\"><i class=\"fal fa-share\"></i>&nbsp;&nbsp;Share</a>";
                             datalist += '</div></div>';
                             $("#bloglist").append(datalist);
                             delete (datalist);

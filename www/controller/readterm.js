@@ -72,7 +72,7 @@ function sendwait() {
             console.log(data);
             if (data['status'] == "OK") {
                 //alert(data['harga']);
-                slide("chat-confirm.html?free=" + free + "&userid=" + userid+ "&id=" + data['chat_id']);
+                slide("chat-confirm.html?free=" + free + "&userid=" + userid + "&id=" + data['chat_id'] + "&waktu=" + data['waktu']);
             } else {
                 swal(data['message']);
                 $("#sendwait").html('Mulai Konsultasi');

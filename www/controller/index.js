@@ -29,7 +29,7 @@ $(document).ready(function () {
   if (localStorage.getItem('rateapp') != 'shown') {
     setTimeout(function () {
       rateapp();
-    }, 5000); // 5000 to load it after 5 seconds from page load
+    }, 1000); // 5000 to load it after 5 seconds from page load
     localStorage.setItem('rateapp', 'shown')
   }
 
@@ -93,7 +93,7 @@ $(document).ready(function () {
     cache: false,
     success: function (data) {
       if (data['status'] == "OK") {
-        $("#jumlah-notifikasi").html('<span style="font-weight: bold; font-size: 14px; color: red; ">' + data['jumlah_notif'] + ' </span>');
+        $("#jumlah-notifikasi").html('<span style="font-weight: bold; font-size: 12px; color: red;  ">' + data['jumlah_notif'] + ' </span>');
       }
 
     }

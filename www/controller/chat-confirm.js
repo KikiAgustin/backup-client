@@ -22,7 +22,8 @@ $(document).ready(function () {
     //$("#start").attr("href","javascript:slide('chat-start.html?userid="+userid+"&chatid="+chatid+"')");
 });
 
-var timeLeft = 60;
+var timeLeft = getvar("waktu");
+
 var timerId = setInterval(countdown, 1000);
 
 function countdown() {
