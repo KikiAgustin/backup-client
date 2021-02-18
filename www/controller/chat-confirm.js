@@ -22,12 +22,23 @@ $(document).ready(function () {
     //$("#start").attr("href","javascript:slide('chat-start.html?userid="+userid+"&chatid="+chatid+"')");
 });
 
-var timeLeft = getvar("waktu");
+var base_url = "https://www.dfunstation.com/api4/android/";
+$.ajax({
+    type: "GET",
+    url: base_url + "index.php/profile/profile/" + localStorage.userid + "/userid/?callback=?",
+    crossDomain: true,
+    cache: false,
+    success: function (data) {
+        timeLeft = data["waktu_tunggu"];
+    }
+});
+
+// var timeLeft = getvar("waktu");
+// var timeLeft = 120;
 
 var timerId = setInterval(countdown, 1000);
 
 function countdown() {
-    var base_url = "https://www.dfunstation.com/api4/android/";
     var id = getvar("id");
     if (timeLeft == -1) {
         $.ajax({
